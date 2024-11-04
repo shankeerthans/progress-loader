@@ -11,6 +11,7 @@ enum ProgressType {
     case circle_checkmark
     case ellipsis
     case circle_loop
+    case linear_loop
     
     var title: String {
         switch self {
@@ -20,6 +21,8 @@ enum ProgressType {
             "Ellipsis progress view"
         case .circle_loop:
             "Circular loop progress view"
+        case .linear_loop:
+            "Linear loop progress view"
         }
     }
 }
