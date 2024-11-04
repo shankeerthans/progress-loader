@@ -15,6 +15,7 @@ struct LinearLoopProgressView: View {
     private let circleLineWidth: CGFloat = 16
     private let width: CGFloat = 300
     private let height: CGFloat = 10
+    let type: ProgressType
     
     var body: some View {
         ZStack {
@@ -22,11 +23,24 @@ struct LinearLoopProgressView: View {
                 .foregroundStyle(.blue.opacity(0.2))
                 .frame(width: width, height: height)
             
-            RoundedRectangle(cornerRadius: height/2)
-                .foregroundStyle(.blue.opacity(0.87))
+            if type == .linear_loop {
+                RoundedRectangle(cornerRadius: height/2)
+                    .foregroundStyle(.blue.opacity(0.87))
                 .frame(width: width/4 + abs(offsetX), height: height)
                 .offset(x: offsetX)
                 .animation(.easeInOut(duration: 0.1), value: offsetX)
+            } else {
+                RoundedRectangle(cornerRadius: height/2)
+                    .foregroundStyle(.blue.opacity(0.87))
+                .frame(width: width/2, height: height)
+                .offset(x: offsetX)
+                .animation(.easeInOut(duration: 0.1), value: offsetX)
+                .mask {
+                    RoundedRectangle(cornerRadius: height/2)
+                        .frame(width: width, height: height)
+                }
+            }
+                
         }
         .frame(width: width, height: width)
         .onAppear {
@@ -39,13 +53,14 @@ struct LinearLoopProgressView: View {
     
     func startTimer() {
         offsetX = 0.0
-        cancellable = Timer.publish(every: 0.006, on: .main, in: .common)
+        cancellable = Timer.publish(every: (type == .linear_loop) ? 0.006 : 0.002, on: .main, in: .common)
             .autoconnect()
             .sink { _ in
                 offsetX += 1 * scalar
-                if offsetX >= width/4 {
+                let threshold = (type == .linear_loop) ? width/4 : width/2
+                if offsetX >= threshold {
                     scalar = -1
-                } else if offsetX <= -width/4 {
+                } else if offsetX <= -threshold {
                     scalar = 1
                 }
             }
@@ -58,5 +73,5 @@ struct LinearLoopProgressView: View {
 }
 
 #Preview {
-    LinearLoopProgressView()
+    LinearLoopProgressView(type: .linear_loop_unchanged_width)
 }
