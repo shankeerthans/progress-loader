@@ -11,8 +11,6 @@
 - 🌀 **Indeterminate Loader**: A simple, spinning activity indicator.
 - ⏳ **Determinate Loader**: Displays progress as it fills up.
 - 🎨 **Customizable**: Easily change colors, sizes, and styles to match your app’s theme.
-- 🎯 **Completion Icons**: Display a checkmark or other custom icons when the task is complete.
-- 💡 **Easy Integration**: No need for packages or dependencies—just copy the code and you're ready to go.
 
 ## Installation
 
