@@ -9,22 +9,23 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
-    private let progressViewTypes: [ProgressType] = [.circle_checkmark]
+    private let progressViewTypes: [ProgressType] = [.circle_checkmark, .ellipsis]
     
     var body: some View {
-        ScrollView {
-            NavigationView {
-                ForEach(0..<progressViewTypes.count, id: \.self) { i in
-                    NavigationLink("\(i+1). \(progressViewTypes[i].title)") {
-                        CircularProgressWithCheckmarkView()
-                    }
-                    .padding(.all, 10)
-                    .background(.bar)
-                    .clipShape(.rect(cornerRadius: 8))
-                    .padding(.all, 4)
+        NavigationStack {
+            List(0..<progressViewTypes.count, id: \.self) { i in
+                NavigationLink("\(i+1). \(progressViewTypes[i].title)", value: progressViewTypes[i])
+            }
+            .navigationDestination(for: ProgressType.self) { type in
+                switch type {
+                case .circle_checkmark:
+                    CircularProgressWithCheckmarkView()
+                case .ellipsis:
+                    EllipsisProgressView()
                 }
             }
         }
+        
     }
 }
 
