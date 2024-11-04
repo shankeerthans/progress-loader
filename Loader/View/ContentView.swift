@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
-    private let progressViewTypes: [ProgressType] = [.circle_checkmark, .ellipsis]
+    private let progressViewTypes: [ProgressType] = [.circle_checkmark, .ellipsis, .circle_loop]
     
     var body: some View {
         NavigationStack {
@@ -22,6 +22,8 @@ struct ContentView: View {
                     CircularProgressWithCheckmarkView()
                 case .ellipsis:
                     EllipsisProgressView()
+                case .circle_loop:
+                    CircularLoopProgressView()
                 }
             }
         }

@@ -26,6 +26,9 @@ struct EllipsisProgressView: View {
         .onAppear {
             startTimer()
         }
+        .onDisappear {
+            stopTimer()
+        }
     }
     
     func startTimer() {

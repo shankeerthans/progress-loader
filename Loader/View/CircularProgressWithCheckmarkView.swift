@@ -9,7 +9,6 @@ import SwiftUI
 import Combine
 
 struct CircularProgressWithCheckmarkView: View {
-    @State private var timer = Timer.publish(every: 0.01, on: .main, in: .common)
     @State private var progress: CGFloat = 0
     @State private var drawCheckmark = false
     @State private var cancellable: AnyCancellable?

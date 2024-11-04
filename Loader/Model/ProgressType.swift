@@ -10,13 +10,16 @@ import Foundation
 enum ProgressType {
     case circle_checkmark
     case ellipsis
+    case circle_loop
     
     var title: String {
         switch self {
         case .circle_checkmark:
-            "Circle progress view with checkmark"
+            "Circular progress view with checkmark"
         case .ellipsis:
             "Ellipsis progress view"
+        case .circle_loop:
+            "Circular loop progress view"
         }
     }
 }
